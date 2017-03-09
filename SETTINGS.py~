@@ -19,5 +19,5 @@ else: #for CNN_A
 
     intermediate_dir = local_dir + 'CNN_A';
     params_dir = intermediate_dir + '/params'
-    output_dir = intermediate_dir + '/output/'
+    output_dir = intermediate_dir + '/output'
     tencia_output_dir = local_dir + 'CNN_B/output'

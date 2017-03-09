@@ -321,9 +321,9 @@ class Dataset(object):
         self._read_all_dicom_images()
 
     def getxydinit(self):
-        """
-        find the approximate center of the left ventricle and a bounding box of it.
-        """
+    """
+    find the approximate center of the left ventricle and a bounding box of it.
+    """
         Nsax = self.slices_ver.shape[0];
         Nsaxmid = Nsax//2;
         imgs = self.images[max(0,Nsaxmid-2):min(Nsax-1,Nsaxmid+2)];
