@@ -1,13 +1,13 @@
 import sys
 sys.path.append('..')
 from SETTINGS import *;
-tag = 7;
-fcn_img_size=196;
-net_version = 2;
+tag = 3;
+fcn_img_size=256;
+net_version = 1;
 heart_delta_multiplier = 1.6; 
-para_ss = 200;
+para_ss = 100;
 do_cv = False;
-num_epochs = 250;
+num_epochs = 0;
 
 shift = 10;
 rotation = 20;

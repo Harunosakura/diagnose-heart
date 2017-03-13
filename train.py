@@ -1,5 +1,5 @@
 def train_tencia_model():
-    from .CNN_B import sunnybrook, segfcn, ch4
+    from CNN_B import sunnybrook, segfcn, ch4
     sunnybrook.process_data_hdf5()
     segfcn.train_model()
     segfcn.evaluate()

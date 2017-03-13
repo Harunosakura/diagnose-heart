@@ -1,12 +1,12 @@
 import os
 import sys
 sys.path.append('..')
-import SETTINGS as sts
+import CNN_B.SETTINGS as sts
 
 data_root = sts.data_root
 data_kaggle = sts.data_kaggle
 data_sunnybrook = sts.data_sunnybrook
-data_manual = sts.data_manual
+data_manual = sts.manual_data_root
 data_intermediate = sts.data_intermediate
 
 params_dir = sts.local_root + 'tencia_scripts/params'

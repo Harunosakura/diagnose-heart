@@ -19,4 +19,4 @@ do
 done
 
 ####generate a sex_age information file
-./get_sex_age.py 1 $Ntrain
+#./get_sex_age.py 1 $Ntrain
