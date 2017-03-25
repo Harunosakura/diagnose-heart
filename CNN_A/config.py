@@ -1,6 +1,5 @@
 import sys
 sys.path.append('..')
-from SETTINGS import *;
 tag = 3;
 fcn_img_size=256;
 net_version = 1;

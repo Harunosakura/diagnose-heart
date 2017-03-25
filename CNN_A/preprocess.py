@@ -1,10 +1,9 @@
 from diagnose_heart_log import dhl
 import dicom, cv2, re, sys
-import os, fnmatch, shutil, subprocess
+import os, fnmatch
 import numpy as np
 sys.path.append('..')
 import SETTINGS as c
-from PIL import Image
 from heart import getAlignImg;
 import h5py
 import dsb_utils as du;

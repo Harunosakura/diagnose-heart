@@ -1,6 +1,5 @@
 from diagnose_heart_log import dhl
 import numpy as np
-import scipy
 
 def gaussian(height, center_x, center_y, width_x, width_y, rotation):
     """Returns a gaussian function with the given parameters"""

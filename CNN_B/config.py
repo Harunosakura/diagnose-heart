@@ -1,4 +1,3 @@
-import os
 import sys
 sys.path.append('..')
 import CNN_B.SETTINGS as sts

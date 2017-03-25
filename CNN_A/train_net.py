@@ -2,12 +2,10 @@ from diagnose_heart_log import dhl
 import theano
 import theano.tensor as T
 import lasagne as nn
-from lasagne.layers import batch_norm as bn
 
 import os
 
 import utils as u
-from models import *
 
 if __name__=='__main__':
     """
@@ -16,7 +14,6 @@ if __name__=='__main__':
     import numpy as np
     import dsb_utils as du
     import config as c
-    import sys
 
     CV = c.do_cv;
     pct_norm_tr = ((1,20),(90,100));

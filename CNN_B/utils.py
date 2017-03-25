@@ -1,14 +1,11 @@
 from diagnose_heart_log import dhl
 import time
-import sys
 import os
 from PIL import Image
 import numpy as np
-
 import lasagne as nn
 import theano
 import theano.tensor as T
-
 import h5py
 from fuel.datasets.hdf5 import H5PYDataset
 from fuel.schemes import ShuffledScheme, SequentialScheme

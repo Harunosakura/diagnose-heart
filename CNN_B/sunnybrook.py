@@ -1,7 +1,6 @@
 from diagnose_heart_log import dhl
-import os, sys, re, cv2, dicom, fnmatch
+import os, re, cv2, dicom, fnmatch
 import numpy as np
-from PIL import Image
 import dsb_utils as du
 import utils as u
 import config as c

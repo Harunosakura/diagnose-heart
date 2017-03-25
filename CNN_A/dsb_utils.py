@@ -1,16 +1,14 @@
 from diagnose_heart_log import dhl
-import os, sys, re, dicom, scipy, cv2
+import os, dicom, scipy, cv2
 import numpy as np
 from skimage import transform, exposure
-from sklearn import decomposition
 from PIL import Image
 from pandas.io.parsers import read_csv
 
-import theano
 import theano.tensor as T
 import lasagne as nn
 
-import utils as u, config as c
+import config as c
 import heart, gaussian2d
 
 #reload(heart)

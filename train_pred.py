@@ -1,7 +1,6 @@
 #!/usr/bin/python2
 import pandas as pd;
 import SETTINGS as sts;
-from fitting_models import *
 import analysis
 from diagnose_heart_log import dhl
 

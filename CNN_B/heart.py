@@ -1,21 +1,8 @@
 from diagnose_heart_log import dhl
 import numpy as np
 import dicom
-import json
 import os
-import random
 import re
-import shutil
-import sys
-from matplotlib import image
-from scipy.ndimage import label
-from scipy.ndimage.morphology import binary_erosion
-from scipy.fftpack import fftn, ifftn
-from scipy.signal import argrelmin, correlate
-from scipy.spatial.distance import euclidean
-from scipy.stats import linregress
-from scipy.optimize import curve_fit
-from scipy.interpolate import UnivariateSpline
 from collections import Counter;
 from PIL import Image,ImageDraw;
 from skimage import exposure;

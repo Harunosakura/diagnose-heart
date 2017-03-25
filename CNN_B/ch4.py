@@ -1,5 +1,5 @@
 from diagnose_heart_log import dhl
-import os, sys, cv2, scipy, numpy as np
+import os, cv2, numpy as np
 import dsb_utils as du, config as c, utils as u, models as m
 import theano, theano.tensor as T, lasagne as nn
 
