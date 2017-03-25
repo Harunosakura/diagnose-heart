@@ -1,3 +1,4 @@
+from diagnose_heart_log import dhl
 import os, sys, re, dicom, scipy, cv2
 import numpy as np
 from skimage import transform, exposure

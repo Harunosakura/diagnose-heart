@@ -1,3 +1,4 @@
+from diagnose_heart_log import dhl
 import os, sys, numpy as np
 import utils as u, config as c, models as m, dsb_utils as du
 import theano, theano.tensor as T, lasagne as nn

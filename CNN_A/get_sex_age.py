@@ -1,4 +1,4 @@
-#!/usr/bin/python2
+from diagnose_heart_log import dhl
 import heart;
 import SETTINGS as c;
 import sys

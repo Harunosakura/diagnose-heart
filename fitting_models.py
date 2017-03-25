@@ -1,3 +1,4 @@
+from diagnose_heart_log import dhl
 from scipy.optimize import minimize;
 import numpy as np;
 from scipy import stats

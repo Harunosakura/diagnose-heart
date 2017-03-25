@@ -3,6 +3,7 @@ import pandas as pd;
 import SETTINGS as sts;
 from fitting_models import *
 import analysis
+from diagnose_heart_log import dhl
 
 def train_sex_age_model(info, train_true):
     ##train sex_age model

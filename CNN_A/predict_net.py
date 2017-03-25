@@ -1,4 +1,4 @@
-#!/usr/bin/python2
+from diagnose_heart_log import dhl
 import dsb_utils as du
 import config as c
 import models as m

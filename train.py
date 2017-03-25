@@ -1,3 +1,5 @@
+from diagnose_heart_log import dhl
+
 def train_tencia_model():
     from CNN_B import sunnybrook, segfcn, ch4
     sunnybrook.process_data_hdf5()

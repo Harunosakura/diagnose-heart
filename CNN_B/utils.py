@@ -1,3 +1,4 @@
+from diagnose_heart_log import dhl
 import time
 import sys
 import os

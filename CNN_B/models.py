@@ -1,3 +1,4 @@
+from diagnose_heart_log import dhl
 import theano
 import theano.tensor as T
 import lasagne as nn

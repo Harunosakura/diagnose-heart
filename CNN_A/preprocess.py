@@ -1,4 +1,4 @@
-#!/usr/bin/python2
+from diagnose_heart_log import dhl
 import dicom, cv2, re, sys
 import os, fnmatch, shutil, subprocess
 import numpy as np

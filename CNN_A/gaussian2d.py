@@ -1,3 +1,4 @@
+from diagnose_heart_log import dhl
 import numpy as np
 import scipy
 

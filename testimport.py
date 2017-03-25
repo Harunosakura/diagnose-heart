@@ -65,3 +65,4 @@ import numpy
 import time
 from scipy.stats import norm
 import csv
+from diagnose_heart_log import dhl

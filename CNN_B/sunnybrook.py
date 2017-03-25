@@ -1,3 +1,4 @@
+from diagnose_heart_log import dhl
 import os, sys, re, cv2, dicom, fnmatch
 import numpy as np
 from PIL import Image
