@@ -172,7 +172,7 @@ class DiagnoseHeartLog(object):
         Log the complexity
         """
         # Format the message
-        m = '[%d]|[%s]|[%s]|[%s]|[%s]' % (turn, file_name, class_name, function_name, complexity)
+        m = '[%d]|[%s]|[%s]|[%s]|[%s]|[%s]' % (turn, file_name, class_name, function_name, 'C',complexity)
 
         # Check if it should be printed
         if self.p_tc:

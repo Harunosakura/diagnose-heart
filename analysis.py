@@ -4,7 +4,6 @@ import SETTINGS as sts;
 import itertools;
 
 from PIL import Image;
-import scipy;
 
 logpdf_dict = {}
 

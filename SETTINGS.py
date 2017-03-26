@@ -1,8 +1,8 @@
-data_root = "/home/ubuntu/sol3/";
+data_root = "E:/Kaggle/HF/data/";
 data_sunnybrook = data_root + 'sunnybrook';
 data_kaggle = data_root + 'kaggledata';
 
-local_dir = data_root + 'diagnose-heart/';
+local_dir = data_root + 'code/';
 manual_data_root = local_dir + 'manual_data'
 data_aug_contours = manual_data_root + '/manual_contours';
 

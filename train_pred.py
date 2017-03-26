@@ -6,62 +6,75 @@ from diagnose_heart_log import dhl
 
 def train_sex_age_model(info, train_true):
     ##train sex_age model
-    print(" ------ train sex age model :");
+    turn = dhl.turn()
+    dhl.log_time_stamp(turn, 'train_pred.py', '-', 'train_sex_age_model', dhl.START_FUNCTION, ' - ')
     sa_model = SexAgeModel();
     sa_model.fit(info,train_true);
     sa_predict = sa_model.predict(info);
     analysis.evaluate_pred(sa_predict, train_true);
+    dhl.log_time_stamp(turn, 'train_pred.py', '-', 'train_sex_age_model', dhl.END_FUNCTION, ' - ')
     return sa_predict;
 
 def train_ch4_model(ch4_data, train_true):
     #tencia's 4-ch model, implemented 02/27
-    print(" ---- train ch4 model :");
+    turn = dhl.turn()
+    dhl.log_time_stamp(turn, 'train_pred.py', '-', 'train_ch4_model', dhl.START_FUNCTION, ' - ')
     ch4_model = Ch4Model();
     ch4_model.fit(ch4_data, train_true);
     ch4_pred = ch4_model.predict(ch4_data);
     analysis.evaluate_pred(ch4_pred, train_true);
+    dhl.log_time_stamp(turn, 'train_pred.py', '-', 'train_ch4_model', dhl.END_FUNCTION, ' - ')
     return ch4_pred;
 
 def train_sax_model(areas_all,train_true, version,cleaner=[]):
-    print(" ---- train sax model :");
+    turn = dhl.turn()
+    dhl.log_time_stamp(turn, 'train_pred.py', '-', 'train_sax_model', dhl.START_FUNCTION, ' - ')
     sax_model = SaxModel(version=version);
     result = analysis.get_preliminary_volume(areas_all,cleaner=cleaner);
     sax_model.fit(result,train_true);
     sax_predict = sax_model.predict(result);
     analysis.evaluate_pred(sax_predict, train_true);
+    dhl.log_time_stamp(turn, 'train_pred.py', '-', 'train_sax_model', dhl.END_FUNCTION, ' - ')
     return sax_predict;
 
 def train_sax_cnt_model(areas_all, cont_all, train_true,version=2,cleaner=[]):
     #sax model method2, use contour compeleteness to filter result
-    print(" ---- train sax countour model :");
+    turn = dhl.turn()
+    dhl.log_time_stamp(turn, 'train_pred.py', '-', 'train_sax_cnt_model', dhl.START_FUNCTION, ' - ')
     cnt_sax_model = SaxModel(version=version);
     cnt_result = analysis.get_preliminary_volume_cnt(areas_all, cont_all,cleaner=cleaner);
     cnt_sax_model.fit(cnt_result,train_true);
     cnt_sax_predict = cnt_sax_model.predict(cnt_result);
     analysis.evaluate_pred(cnt_sax_predict, train_true);
+    dhl.log_time_stamp(turn, 'train_pred.py', '-', 'train_sax_cnt_model', dhl.END_FUNCTION, ' - ')
     return cnt_sax_predict;
 
 def train_sax_cnt_filter_model(areas_all, cont_all, train_true,cleaner=[]):
-    print(" ---- train sax countour filter model :");
+    turn = dhl.turn()
+    dhl.log_time_stamp(turn, 'train_pred.py', '-', 'train_sax_cnt_filter_model', dhl.START_FUNCTION, ' - ')
     cnt_result = analysis.get_preliminary_volume_cnt_filter(areas_all,cont_all,cleaner=cleaner);
     cnt_sax_model = SaxFilterModel();
     cnt_sax_model.fit(cnt_result,train_true);
     cnt_sax_predict = cnt_sax_model.predict(cnt_result);
     analysis.evaluate_pred(cnt_sax_predict, train_true);
+    dhl.log_time_stamp(turn, 'train_pred.py', '-', 'train_sax_cnt_filter_model', dhl.END_FUNCTION, ' - ')
     return cnt_sax_predict;
 
 def train_oneslice_model(areas_all,train_true):
     #train OneSliceModel using CNN_B result
-    print(" --- train oneslice model :");
+    turn = dhl.turn()
+    dhl.log_time_stamp(turn, 'train_pred.py', '-', 'train_oneslice_model', dhl.START_FUNCTION, ' - ')
     oneslice_model = OneSliceModel();
     oneslice_model.fit(areas_all,train_true);
     oneslice_predict = oneslice_model.predict(areas_all);
     analysis.evaluate_pred(oneslice_predict, train_true);
+    dhl.log_time_stamp(turn, 'train_pred.py', '-', 'train_oneslice_model', dhl.END_FUNCTION, ' - ')
     return oneslice_predict;
 
 def build_default_model(oneslice_pred, ch4_pred, sa_predict,p_1 = 0.6):
     #p_1 one slice model percentage
-    print(" --- building default model :");
+    turn = dhl.turn()
+    dhl.log_time_stamp(turn, 'train_pred.py', '-', 'build_default_model', dhl.START_FUNCTION, ' - ')
     default_pred = {};
     def _bdm_ave(x1,x2,x0):
         if np.isnan(x1[0]):
@@ -83,9 +96,12 @@ def build_default_model(oneslice_pred, ch4_pred, sa_predict,p_1 = 0.6):
         x[0:2] = _bdm_ave(pred1[0:2],pred2[0:2],value[0:2]);
         x[2:4] = _bdm_ave(pred1[2:4],pred2[2:4],value[2:4]);
         default_pred[case] = x;
+    dhl.log_time_stamp(turn, 'train_pred.py', '-', 'build_default_model', dhl.END_FUNCTION, ' - ')
     return default_pred;
 
 if __name__ == '__main__':
+    turn = dhl.turn()
+    dhl.log_time_stamp(turn, 'train_pred.py', '-', '__main__', dhl.START_FUNCTION, ' - ')
     cleaner = [0,1,2]; #set to [] to turn it off
     #####Load all data, same in the test code, but we can filter out train in train and test for test
     info = pd.read_csv(sts.output_dir + '/info.csv')
@@ -176,3 +192,4 @@ if __name__ == '__main__':
     #we might want to save the parameters of the models, and code another script to calculate the test cases. These fittings are very quick anyway.
     analysis.make_submit(final_pred, 701, 1140, "test"); #inclusive
     analysis.save_intermediate(final_pred, 1, 1140, "test"); #raw 
+    dhl.log_time_stamp(turn, 'train_pred.py', '-', '__main__', dhl.END_FUNCTION, ' - ')

@@ -1,6 +1,6 @@
 import sys
 sys.path.append('..')
-import CNN_B.SETTINGS as sts
+import SETTINGS as sts
 
 data_root = sts.data_root
 data_kaggle = sts.data_kaggle
