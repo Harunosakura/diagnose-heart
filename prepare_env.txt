@@ -1,0 +1,140 @@
+# create folder hierarchy
+
+PROJ_DIR=~/sol1
+mkdir $PROJ_DIR
+KAGGLE_DATA_DIR=$PROJ_DIR/kaggledata
+mkdir $KAGGLE_DATA_DIR
+SB_DATA_DIR=$PROJ_DIR/sunnybrook
+mkdir $SB_DATA_DIR
+DIAG_HEAR_DIR=$PROJ_DIR/diagnose-heart
+CV3_DIR=~/opencv
+CV2_DIR=~/opencv2
+
+USER_DIR=/home/ubuntu
+PROJ_DIR=$USER_DIR/sol1
+KAGGLE_DATA_DIR=$PROJ_DIR/kaggledata
+SB_DATA_DIR=$PROJ_DIR/sunnybrook
+DIAG_HEAR_DIR=$PROJ_DIR/diagnose-heart
+
+CV3_DIR=$USER_DIR/opencv
+CV2_DIR=$USER_DIR/opencv2
+
+# essentials
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install python-dev libxml2-dev libxslt1-dev zlib1g-dev
+sudo apt-get install --assume-yes python-pip python-dev
+sudo -H pip install --upgrade setuptools
+sudo apt-get install --assume-yes git
+sudo apt-get install unzip
+sudo -H pip install kaggle-cli
+sudo -H pip install 'requests[security]'
+
+# install all python libraries required for compiling the solution
+sudo -H pip install numpy
+sudo apt-get install --assume-yes python-scipy python-skimage
+sudo -H pip install lasagne pydicom
+sudo -H pip install --upgrade https://github.com/Lasagne/Lasagne/archive/master.zip
+
+# opencv3 dependencies
+sudo apt-get install --assume-yes build-essential cmake git
+
+# ffmpeg
+sudo add-apt-repository ppa:mc3man/trusty-media -y
+sudo apt-get update
+sudo apt-get install --assume-yes ffmpeg gstreamer0.10-ffmpeg
+
+# continue with the opencv dependencies
+sudo apt-get install --assume-yes build-essential pkg-config unzip qtbase5-dev python-dev python3-dev python-numpy python3-numpy
+sudo apt-get install --assume-yes libopencv-dev libgtk-3-dev libdc1394-22 libdc1394-22-dev libjpeg-dev libpng12-dev libtiff5-dev libjasper-dev
+sudo apt-get install --assume-yes libavcodec-dev libavformat-dev libswscale-dev libxine2-dev libgstreamer0.10-dev libgstreamer-plugins-base0.10-dev
+sudo apt-get install --assume-yes libv4l-dev libtbb-dev libfaac-dev libmp3lame-dev libopencore-amrnb-dev libopencore-amrwb-dev libtheora-dev
+sudo apt-get install --assume-yes libvorbis-dev libxvidcore-dev v4l-utils
+sudo -H pip install Theano
+sudo apt-get install --assume-yes python-skimage
+sudo -H pip install -U scikit-learn
+sudo -H pip install pandas
+sudo -H pip install cython
+sudo apt-get install --assume-yes libhdf5-dev
+sudo -H pip install h5py
+sudo -H pip install fuel
+sudo -H pip install tqdm
+
+# install opencv version 3.1.0 to run the required file for CNN_A models
+# it is the version 3.2.0
+cd $USER_DIR
+git clone 'https://github.com/opencv/opencv'
+cd opencv
+mkdir build
+cd build/
+cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local -D WITH_TBB=ON -D WITH_V4L=ON -D WITH_QT=ON -D WITH_OPENGL=ON -D WITH_CUBLAS=ON -DCUDA_NVCC_FLAGS="-D_FORCE_INLINES" ..    
+make -j $(($(nproc) + 1))
+sudo make
+sudo /bin/bash -c 'echo "/usr/local/lib" > /etc/ld.so.conf.d/opencv.conf'
+sudo ldconfig
+sudo make install
+sudo apt-get update
+
+# import fixed heart-diagnose code with the right folder definition
+cd  $PROJ_DIR
+git clone https://github.com/Harunosakura/diagnose-heart
+
+# unzip Kaggle data
+# MANUALLY
+# you should put the unzipped folders (test, validate, train) in '/home/ubuntu/sol3/kaggledata'
+# if they are zips uncomment the following
+#unzip *.zip
+#rm *.zip
+cd $USER_DIR
+#kg download -u 'noon.ab@gmail.com' -p 'beethoven' -c 'second-annual-data-science-bowl'
+kg download -u 'noon.ab@gmail.com' -p 'beethoven' -c 'second-annual-data-science-bowl' -f 'train.zip'
+kg download -u 'noon.ab@gmail.com' -p 'beethoven' -c 'second-annual-data-science-bowl' -f 'validate.zip'
+kg download -u 'noon.ab@gmail.com' -p 'beethoven' -c 'second-annual-data-science-bowl' -f 'test.zip'
+kg download -u 'noon.ab@gmail.com' -p 'beethoven' -c 'second-annual-data-science-bowl' -f 'train.csv.zip'
+kg download -u 'noon.ab@gmail.com' -p 'beethoven' -c 'second-annual-data-science-bowl' -f 'sample_submission_validate.csv.zip'
+
+cd $KAGGLE_DATA_DIR
+kg download -u 'noon.ab@gmail.com' -p 'beethoven' -c 'second-annual-data-science-bowl' -f 'solution.csv'
+kg download -u 'noon.ab@gmail.com' -p 'beethoven' -c 'second-annual-data-science-bowl' -f 'validate.csv'
+kg download -u 'noon.ab@gmail.com' -p 'beethoven' -c 'second-annual-data-science-bowl' -f 'sample_submission_test.csv'
+sudo unzip /home/ubuntu/train.csv.zip -d /home/ubuntu/sol3/kaggledata/
+sudo unzip /home/ubuntu/sample_submission_validate.csv.zip -d /home/ubuntu/sol3/kaggledata/
+sudo unzip /home/ubuntu/validate.zip -d /home/ubuntu/sol3/kaggledata/
+sudo unzip /home/ubuntu/train.zip -d /home/ubuntu/sol3/kaggledata/
+sudo unzip /home/ubuntu/test.zip -d /home/ubuntu/sol3/kaggledata/
+
+# transfrom data for 'diagnose-heart' algorithm
+# Append the rows from validate.csv to train.csv and rename it as train_valid.csv
+tail -n +2 validate.csv | while read p; do
+   echo $p >> train.csv
+done
+cp train.csv train_valid.csv
+
+# download and unzip Sunny brook dataset
+cd $SB_DATA_DIR
+wget http://capwebprd02.its.auckland.ac.nz/files/SCD/SCD_ManualContours.zip
+unzip *.zip
+rm *.zip
+wget http://capwebprd02.its.auckland.ac.nz/files/SCD/SCD_DeidentifiedImages.zip
+unzip *.zip
+rm *.zip
+
+# run CNN_A models
+cd $DIAG_HEAR_DIR/CNN_A
+bash run_train.sh
+
+########################################################################
+
+# remove opencv version 3.1.0 and install 2.4.12 to run CNN_B models
+#go to opencv/build
+#sudo make uninstall
+
+# run CNN_B models using following commands
+# ...
+
+# preparation to run CNN_B models
+mkdir $DIAG_HEART_DIR/data_intermediate
+
+# run CNN_B models using following commands
+cd $DIAG_HEART_DIR
+python train.py
