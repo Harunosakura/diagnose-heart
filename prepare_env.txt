@@ -1,3 +1,4 @@
+# lunch time March 26, 2017 at 6:58:26 AM UTC+2
 # create folder hierarchy
 
 PROJ_DIR=~/sol1
@@ -21,6 +22,7 @@ sudo apt-get update
 sudo apt-get upgrade
 sudo apt-get install python-dev libxml2-dev libxslt1-dev zlib1g-dev
 sudo apt-get install --assume-yes python-pip python-dev
+sudo pip install --upgrade pip
 sudo -H pip install --upgrade setuptools
 sudo apt-get install --assume-yes git
 sudo apt-get install unzip
@@ -95,11 +97,11 @@ cd $KAGGLE_DATA_DIR
 kg download -u 'noon.ab@gmail.com' -p 'beethoven' -c 'second-annual-data-science-bowl' -f 'solution.csv'
 kg download -u 'noon.ab@gmail.com' -p 'beethoven' -c 'second-annual-data-science-bowl' -f 'validate.csv'
 kg download -u 'noon.ab@gmail.com' -p 'beethoven' -c 'second-annual-data-science-bowl' -f 'sample_submission_test.csv'
-sudo unzip /home/ubuntu/train.csv.zip -d /home/ubuntu/sol3/kaggledata/
-sudo unzip /home/ubuntu/sample_submission_validate.csv.zip -d /home/ubuntu/sol3/kaggledata/
-sudo unzip /home/ubuntu/validate.zip -d /home/ubuntu/sol3/kaggledata/
-sudo unzip /home/ubuntu/train.zip -d /home/ubuntu/sol3/kaggledata/
-sudo unzip /home/ubuntu/test.zip -d /home/ubuntu/sol3/kaggledata/
+sudo unzip /home/ubuntu/train.csv.zip -d /home/ubuntu/sol1/kaggledata/
+sudo unzip /home/ubuntu/sample_submission_validate.csv.zip -d /home/ubuntu/sol1/kaggledata/
+sudo unzip /home/ubuntu/validate.zip -d /home/ubuntu/sol1/kaggledata/
+sudo unzip /home/ubuntu/train.zip -d /home/ubuntu/sol1/kaggledata/
+sudo unzip /home/ubuntu/test.zip -d /home/ubuntu/sol1/kaggledata/
 
 # transfrom data for 'diagnose-heart' algorithm
 # Append the rows from validate.csv to train.csv and rename it as train_valid.csv
