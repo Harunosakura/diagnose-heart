@@ -12,9 +12,6 @@ CV2_DIR=~/opencv2
 
 USER_DIR=/home/ubuntu
 PROJ_DIR=$USER_DIR/sol1
-KAGGLE_DATA_DIR=$PROJ_DIR/kaggledata
-SB_DATA_DIR=$PROJ_DIR/sunnybrook
-DIAG_HEAR_DIR=$PROJ_DIR/diagnose-heart
 
 CV3_DIR=$USER_DIR/opencv
 CV2_DIR=$USER_DIR/opencv2
@@ -36,6 +33,7 @@ sudo apt-get install --assume-yes python-scipy python-skimage
 sudo -H pip install lasagne pydicom
 sudo -H pip install --upgrade https://github.com/Lasagne/Lasagne/archive/master.zip
 
+# lspci | grep VGA
 # opencv3 dependencies
 sudo apt-get install --assume-yes build-essential cmake git
 
