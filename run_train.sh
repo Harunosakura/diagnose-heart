@@ -4,11 +4,13 @@ Ntrain=1140;
 
 ##### preprocess the data for the CNN to train
 ##### we prepare two different image size to train
-THEANO_FLAGS='device=cpu' ./preprocess.py 196
-THEANO_FLAGS='device=cpu' ./preprocess.py 256
+THEANO_FLAGS='device=gpu' ./preprocess.py 196
+THEANO_FLAGS='device=gpu' ./preprocess.py 256
 
 ####run all version of the net with different parameters
-for version in 3 5 6 7 10 11 12 13
+#for version in 3 5 6 7 10 11 12 13
+for version in 3
+
 do
 	#set the parameters
 	cp config_v"$version".py config.py
